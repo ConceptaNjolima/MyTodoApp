@@ -42,11 +42,7 @@ public class MainActivity extends AppCompatActivity {
         item_list=findViewById(R.id.etItem);
 
 
-        items= new ArrayList<>();
-        items.add("Buy milk");
-        items.add("Hit the gym");
-        items.add("Finish homework");
-        items.add("visit Imma");
+        loadItems();
 
         ItemsAdapter.onLongClickListener onLongClickListener =new ItemsAdapter.onLongClickListener(){
             @Override
@@ -56,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
                 //notify adapter the position at which we deleted the item
                 itemsAdapter.notifyItemRemoved(position);
                 Toast.makeText(getApplicationContext(),"Item was deleted",Toast.LENGTH_SHORT).show();
+                saveItems();
+
             }
         };
         ItemsAdapter.OnClickListener clickListener=new ItemsAdapter.OnClickListener() {
@@ -85,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 itemsAdapter.notifyItemInserted(items.size()-1);
                 add_item.setText("");
                 Toast.makeText(getApplicationContext(),"Item was added",Toast.LENGTH_SHORT).show();
+                saveItems();
 
             }
         });
